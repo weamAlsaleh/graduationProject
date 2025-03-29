@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل الغياب - المعلمة</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
+    <h1>تسجيل/تعديل غياب الطالبات</h1>
+    <nav class="top-nav">
+      <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+      <ul class="top-buttons">
+        <li><button onclick="logout()">تسجيل الخروج</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- يمكن تغيير الآلية؛ في هذا المثال تسمح المعلّمة باختيار المادة من قائمة منسدلة -->
+    <div>
+      <label for="subjectSelect">اختر المادة:</label>
+      <select id="subjectSelect">
+        <option value="" selected disabled>-- اختر مادة --</option>
+        <option value="مادة 1">مادة 1</option>
+        <option value="مادة 2">مادة 2</option>
+        <!-- يمكنك إضافة باقي المواد أو جلبها ديناميكيًا من db.json -->
+      </select>
+      <button id="loadStudentsBtn">عرض الطالبات</button>
+    </div>
+
+    <form id="markAttendanceForm" style="margin-top: 20px;">
+      <table id="studentsTable">
+        <thead>
+          <tr>
+            <th>اسم الطالبة</th>
+            <th>الرقم الأكاديمي</th>
+            <th>غياب</th>
+          </tr>
+        </thead>
+        <tbody id="studentsTbody">
+          <!-- يتم تعبئته ديناميكيًا بجافاسكربت -->
+        </tbody>
+      </table>
+      <button type="submit" style="margin-top: 15px;">حفظ الغياب</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>جميع الحقوق محفوظة لدى طالبات وئام ، رفعة ، أشجان ، مجيدة ، شوق</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة تحكم الطالبة</title>
+  <link rel="icon" type="png" href="logo.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
+
+    <nav class="top-nav">
+      <!-- زر الثلاث خطوط لفتح القائمة الجانبية -->
+      <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+      <ul class="top-buttons">
+        <!-- زر تسجيل الخروج -->
+        <li><button onclick="logout()">تسجيل الخروج</button></li>
+      </ul>
+    </nav>
+    <h1>أهلاً بكِ يا طالبة في أكاديمية ردنا</h1>
+  </header>
+
+  <!-- القائمة الجانبية -->
+  <aside id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="studentSchedule.html">عرض الجدول الدراسي</a></li>
+      <li><a href="studentAttendance.html">عرض الغيابات</a></li>
+      <li><a href="studentGrades.html">عرض الدرجات</a></li>
+    </ul>
+  </aside>
+  
+  <section class="student-info">
+    <h2>بيانات الطالبة</h2>
+    <p><strong>الاسم:</strong> <span id="studentName"></span></p>
+    <p><strong>الرقم الأكاديمي:</strong> <span id="academicId"></span></p>
+    <p><strong>التخصص:</strong> <span id="major"></span></p>
+    <p><strong>رقم الجوال:</strong> <span id="phone"></span></p>
+    <p><strong>البريد الإلكتروني:</strong> <span id="email"></span></p>
+  </section>
+
+  <footer>
+    <p>جميع الحقوق محفوظة لدى طالبات وئام ، رفعة ، أشجان ، مجيدة ، شوق</p>
+  </footer>
+
+  <!-- جلب بيانات الطالبة من db.json -->
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const userId = sessionStorage.getItem("loggedInUserId");
+      // إذا لم يكن هناك مستخدم مسجّل، العودة للصفحة الرئيسية
+      if (!userId) {
+        window.location.href = "login.html";
+        return;
+      }
+      try {
+        const response = await fetch("db.json");
+        const data = await response.json();
+
+        // نبحث عن مستخدم مطابق لرقم userId في sessionStorage
+        const user = data.users.find(u => u.userId === userId && u.role === "student");
+        if (!user) {
+          alert("لم يتم العثور على بيانات الطالبة!");
+          window.location.href = "login.html";
+          return;
+        }
+
+        // تعبئة الصفحة ببيانات الطالبة
+        document.getElementById("studentName").textContent = user.name;
+        document.getElementById("academicId").textContent = user.academicId;
+        document.getElementById("major").textContent = user.major;
+        document.getElementById("phone").textContent = user.phone;
+        document.getElementById("email").textContent = user.email;
+
+      } catch (error) {
+        console.error(error);
+        alert("حدث خطأ في جلب البيانات!");
+      }
+    });
+  </script>
+</body>
+</html>

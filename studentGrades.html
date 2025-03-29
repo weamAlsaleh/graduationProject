@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الدرجات - الطالبة</title>
+  <link rel="icon" type="png" href="logo.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
+    <nav class="top-nav">
+      <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+      <ul class="top-buttons">
+        <li><a href="student.html">رجوع</a></li>
+        <li><button onclick="logout()">تسجيل الخروج</button></li>
+      </ul>
+    </nav>
+    <h1>الدرجات</h1>
+  </header>
+
+  <aside id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="studentSchedule.html">الجدول الدراسي</a></li>
+      <li><a href="studentAttendance.html">الغيابات</a></li>
+      <li><a href="studentGrades.html" class="active">الدرجات</a></li>
+    </ul>
+  </aside>
+  
+  <section class="grades">
+    <table>
+      <thead>
+        <tr>
+          <th>المادة</th>
+          <th>الدرجة</th>
+        </tr>
+      </thead>
+      <tbody id="gradesTableBody">
+        <!-- تعبئة ديناميكية -->
+      </tbody>
+    </table>
+  </section>
+  
+  <footer>
+    <p>جميع الحقوق محفوظة لدى طالبات وئام ، رفعة ، أشجان ، مجيدة ، شوق</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const userId = sessionStorage.getItem("loggedInUserId");
+      if (!userId) {
+        window.location.href = "login.html";
+        return;
+      }
+      try {
+        const response = await fetch("db.json");
+        const data = await response.json();
+        
+        const myGrades = data.grades.filter(g => g.userId === userId);
+        
+        const tbody = document.getElementById("gradesTableBody");
+        myGrades.forEach(g => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${g.subject}</td>
+            <td>${g.grade}</td>
+          `;
+          tbody.appendChild(row);
+        });
+      } catch (error) {
+        console.error(error);
+        alert("حدث خطأ في جلب البيانات!");
+      }
+    });
+  </script>
+</body>
+</html>

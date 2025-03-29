@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إدارة الجداول</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
+    <nav class="top-nav">
+      <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+      <ul class="top-buttons">
+        <li><a href="admin.html">رجوع</a></li>
+        <li><button onclick="logout()">تسجيل الخروج</button></li>
+      </ul>
+    </nav>
+    <h1>إدارة الجداول (للطالبات والمعلمات)</h1>
+  </header>
+
+  <aside id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="teacherRegister.html">تسجيل معلمة</a></li>
+      <li><a href="teacherUpdate.html">تحديث بيانات معلمة</a></li>
+      <li><a href="adminSchedule.html" class="active">إدارة الجداول</a></li>
+      <li><a href="adminSubjects.html">إدارة المواد</a></li>
+    </ul>
+  </aside>
+  
+  <section class="schedule-management">
+    <h2>إضافة جدول/حصة جديدة</h2>
+    <form id="addScheduleForm">
+      <label for="scheduleRole">النوع:</label>
+      <select id="scheduleRole" name="scheduleRole">
+        <option value="student">طالبة</option>
+        <option value="teacher">معلمة</option>
+      </select>
+
+      <label for="userIdInput">رقم المستخدم (User ID):</label>
+      <input type="text" id="userIdInput" required>
+      
+      <label for="subjectInput">اسم المادة:</label>
+      <input type="text" id="subjectInput" required>
+
+      <label for="dayInput">اليوم:</label>
+      <input type="text" id="dayInput" placeholder="مثال: الأحد" required>
+
+      <label for="timeInput">الوقت:</label>
+      <input type="text" id="timeInput" placeholder="مثال: 8:00 - 10:00 صباحاً" required>
+
+      <label for="roomInput">القاعة:</label>
+      <input type="text" id="roomInput" placeholder="مثال: A101" required>
+
+      <button type="submit">إضافة للجدول</button>
+    </form>
+
+    <hr>
+
+    <h2>عرض الجداول الحالية</h2>
+    <table id="scheduleTable">
+      <thead>
+        <tr>
+          <th>النوع</th>
+          <th>رقم المستخدم</th>
+          <th>المادة</th>
+          <th>اليوم</th>
+          <th>الوقت</th>
+          <th>القاعة</th>
+          <th>تعديل</th>
+          <th>حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- سيتم تعبئة السجلات ديناميكياً من script.js -->
+      </tbody>
+    </table>
+  </section>
+
+  <footer>
+    <p>جميع الحقوق محفوظة لدى طالبات وئام ، رفعة ، أشجان ، مجيدة ، شوق</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>الجدول الدراسي - الطالبة</title>
+  <link rel="icon" type="png" href="logo.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
+    <nav class="top-nav">
+      <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+      <ul class="top-buttons">
+        <li><a href="student.html">رجوع</a></li>
+        <li><button onclick="logout()">تسجيل الخروج</button></li>
+      </ul>
+    </nav>
+    <h1>الجدول الدراسي</h1>
+  </header>
+
+  <aside id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="studentSchedule.html" class="active">الجدول الدراسي</a></li>
+      <li><a href="studentAttendance.html">الغيابات</a></li>
+      <li><a href="studentGrades.html">الدرجات</a></li>
+    </ul>
+  </aside>
+  
+  <section class="schedule">
+    <table>
+      <thead>
+        <tr>
+          <th>اليوم</th>
+          <th>المادة</th>
+          <th>الوقت</th>
+          <th>القاعة</th>
+        </tr>
+      </thead>
+      <tbody id="scheduleTableBody">
+        <!-- سيتم تعبئته ديناميكياً -->
+      </tbody>
+    </table>
+  </section>
+  
+  <footer>
+    <p>جميع الحقوق محفوظة لدى طالبات وئام ، رفعة ، أشجان ، مجيدة ، شوق</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const userId = sessionStorage.getItem("loggedInUserId");
+      if (!userId) {
+        window.location.href = "login.html";
+        return;
+      }
+      try {
+        const response = await fetch("db.json");
+        const data = await response.json();
+        
+        // نجلب كل السجلات الخاصة بالطالب
+        const mySchedules = data.schedules.filter(item => item.userId === userId);
+        
+        const tbody = document.getElementById("scheduleTableBody");
+        mySchedules.forEach(sch => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${sch.day}</td>
+            <td>${sch.subject}</td>
+            <td>${sch.time}</td>
+            <td>${sch.room}</td>
+          `;
+          tbody.appendChild(row);
+        });
+
+      } catch (error) {
+        console.error(error);
+        alert("حدث خطأ في جلب البيانات!");
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تحديث بيانات الطالبات</title>
+  <link rel="icon" type="png" href="logo.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
+    <nav class="top-nav">
+      <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+      <ul class="top-buttons">
+        <li><a href="admin.html">رجوع</a></li>
+        <li><button onclick="logout()">تسجيل الخروج</button></li>
+      </ul>
+    </nav>
+    <h1>تحديث بيانات الطالبات</h1>
+  </header>
+
+  <aside id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="adminRegister.html">تسجيل الطالبات الجدد</a></li>
+      <li><a href="adminUpdate.html" class="active">تحديث بيانات الطالبات</a></li>
+    </ul>
+  </aside>
+  
+  <section class="update-form">
+
+    <!-- جزء أول: البحث عن الطالبة بالرقم الأكاديمي -->
+    <div class="search-student">
+      <label for="searchAcademicId">الرقم الأكاديمي للطالبة:</label>
+      <input type="text" id="searchAcademicId" placeholder="أدخلي الرقم الأكاديمي" required>
+      <button id="loadStudentDataBtn">عرض البيانات</button>
+    </div>
+
+    <!-- جزء ثاني: عرض الحقول للقراءة/التعديل بعد جلب بيانات الطالبة -->
+    <form id="updateStudentForm" style="margin-top: 20px; display: none;">
+      
+      <!-- الحقول التي لا يجب تعديلها: userId, academicId (اقرئي فقط) -->
+      <label for="updUserId">معرّف المستخدم (User ID):</label>
+      <input type="text" id="updUserId" name="updUserId" readonly>
+
+      <label for="updAcademicId">الرقم الأكاديمي:</label>
+      <input type="text" id="updAcademicId" name="updAcademicId" readonly>
+      
+      <!-- بقية الحقول القابلة للتعديل -->
+      <label for="updName">اسم الطالبة:</label>
+      <input type="text" id="updName" name="updName">
+      
+      <label for="updMajor">التخصص:</label>
+      <input type="text" id="updMajor" name="updMajor">
+
+      <label for="updPhone">رقم الجوال:</label>
+      <input type="text" id="updPhone" name="updPhone">
+
+      <label for="updEmail">البريد الإلكتروني:</label>
+      <input type="email" id="updEmail" name="updEmail">
+
+      <label for="updPassword">كلمة المرور:</label>
+      <input type="password" id="updPassword" name="updPassword">
+      
+      <button type="submit">حفظ التعديلات</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>جميع الحقوق محفوظة لدى طالبات وئام ، رفعة ، أشجان ، مجيدة ، شوق</p>
+  </footer>
+</body>
+</html>

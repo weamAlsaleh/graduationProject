@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>لوحة تحكم المعلمة</title>
+  <link rel="icon" type="png" href="logo.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
+    <nav class="top-nav">
+      <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+      <ul class="top-buttons">
+        <li><button onclick="logout()">تسجيل الخروج</button></li>
+      </ul>
+    </nav>
+    <h1>أهلاً بكِ يا معلمة</h1>
+  </header>
+  
+  <aside id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="teacherSchedule.html">عرض جدول المعلمة</a></li>
+      <li><a href="teacherAttendance.html">تسجيل حضور الطالبات</a></li>
+      <li><a href="teacherGrades.html">إدخال الدرجات</a></li>
+    </ul>
+  </aside>
+  
+  <section class="teacher-info">
+    <h2>بيانات المعلمة</h2>
+    <p><strong>الاسم:</strong> <span id="teacherName"></span></p>
+    <p><strong>التخصص:</strong> <span id="specialty"></span></p>
+    <p><strong>رقم التواصل:</strong> <span id="phone"></span></p>
+    <p><strong>البريد الإلكتروني:</strong> <span id="email"></span></p>
+  </section>
+
+  <footer>
+    <p>جميع الحقوق محفوظة لدى طالبات وئام ، رفعة ، أشجان ، مجيدة ، شوق</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const userId = sessionStorage.getItem("loggedInUserId");
+      if (!userId) {
+        window.location.href = "login.html";
+        return;
+      }
+      try {
+        const response = await fetch("db.json");
+        const data = await response.json();
+
+        const user = data.users.find(u => u.userId === userId && u.role === "teacher");
+        if (!user) {
+          alert("لم يتم العثور على بيانات المعلمة!");
+          window.location.href = "login.html";
+          return;
+        }
+
+        document.getElementById("teacherName").textContent = user.name;
+        document.getElementById("specialty").textContent = user.specialty;
+        document.getElementById("phone").textContent = user.phone;
+        document.getElementById("email").textContent = user.email;
+      } catch (err) {
+        console.error(err);
+        alert("حدث خطأ في جلب البيانات!");
+      }
+    });
+  </script>
+</body>
+</html>

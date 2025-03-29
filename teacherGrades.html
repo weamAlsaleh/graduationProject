@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>إدخال الدرجات</title>
+  <link rel="icon" type="png" href="logo.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
+    <nav class="top-nav">
+      <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+      <ul class="top-buttons">
+        <li><a href="teacher.html">رجوع</a></li>
+        <li><button onclick="logout()">تسجيل الخروج</button></li>
+      </ul>
+    </nav>
+    <h1>إدخال الدرجات</h1>
+  </header>
+
+  <aside id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="teacherSchedule.html">عرض جدول المعلمة</a></li>
+      <li><a href="teacherAttendance.html">تسجيل حضور الطالبات</a></li>
+      <li><a href="teacherGrades.html" class="active">إدخال الدرجات</a></li>
+    </ul>
+  </aside>
+  
+  <section class="grades-form">
+    <form id="teacherGradeForm">
+      <label for="studentIdInput">رقم الطالبة:</label>
+      <input type="text" id="studentIdInput" name="studentId" required>
+      
+      <label for="subjectInput">المادة:</label>
+      <select id="subjectInput" name="subject" required>
+        <option value="">--اختر المادة--</option>
+        <option value="مادة 1">مادة 1</option>
+        <option value="مادة 2">مادة 2</option>
+      </select>
+      
+      <label for="gradeInput">الدرجة:</label>
+      <input type="number" id="gradeInput" name="grade" required>
+      
+      <button type="submit">إدخال</button>
+    </form>
+  </section>
+  
+  <footer>
+    <p>جميع الحقوق محفوظة لدى طالبات وئام ، رفعة ، أشجان ، مجيدة ، شوق</p>
+  </footer>
+</body>
+</html>

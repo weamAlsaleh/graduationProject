@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل معلمة جديدة</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
+    <nav class="top-nav">
+      <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+      <ul class="top-buttons">
+        <li><a href="admin.html">رجوع</a></li>
+        <li><button onclick="logout()">تسجيل الخروج</button></li>
+      </ul>
+    </nav>
+    <h1>تسجيل معلمة جديدة</h1>
+  </header>
+
+  <aside id="sideMenu" class="side-menu">
+    <ul>
+      <!-- ضعي روابط أخرى أو قوائم جانبية حسب احتياجك -->
+      <li><a href="teacherRegister.html" class="active">تسجيل معلمة</a></li>
+      <li><a href="teacherUpdate.html">تحديث بيانات معلمة</a></li>
+      <li><a href="adminSchedule.html">إدارة الجداول</a></li>
+      <li><a href="adminSubjects.html">إدارة المواد</a></li>
+    </ul>
+  </aside>
+  
+  <section class="register-form">
+    <form id="registerTeacherForm">
+      <label for="teacherName">اسم المعلمة:</label>
+      <input type="text" id="teacherName" name="teacherName" required>
+      
+      <label for="teacherId">رقم المعلمة (User ID):</label>
+      <input type="text" id="teacherId" name="teacherId" required>
+      
+      <label for="specialty">التخصص:</label>
+      <input type="text" id="specialty" name="specialty" required>
+
+      <label for="phone">رقم الجوال:</label>
+      <input type="text" id="phone" name="phone" required>
+
+      <label for="email">البريد الإلكتروني:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="password">كلمة المرور:</label>
+      <input type="password" id="password" name="password" required>
+      
+      <button type="submit">تسجيل</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>جميع الحقوق محفوظة لدى طالبات وئام ، رفعة ، أشجان ، مجيدة ، شوق</p>
+  </footer>
+</body>
+</html>

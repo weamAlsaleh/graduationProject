@@ -1,0 +1,122 @@
+{
+  "users": [
+    {
+      "userId": "1111",
+      "password": "pass1",
+      "role": "student",
+      "name": "وئام محمد",
+      "academicId": "123456",
+      "major": "حاسب آلي",
+      "phone": "0500000000",
+      "email": "weam@student.com",
+      "id": "60a1"
+    },
+    {
+      "userId": "1222",
+      "password": "pass12",
+      "role": "student",
+      "name": "رفعه ابراهيم",
+      "academicId": "123123",
+      "major": "حاسب آلي",
+      "phone": "0500000000",
+      "email": "student2@example.com",
+      "id": "60a2"
+    },
+    {
+      "userId": "2222",
+      "password": "pass2",
+      "role": "teacher",
+      "name": "الاء السعدون",
+      "specialty": "حاسب آلي",
+      "phone": "0555555555",
+      "email": "teacher@example.com",
+      "id": "0aeb"
+    },
+    {
+      "userId": "3333",
+      "password": "pass3",
+      "role": "admin",
+      "name": "نورة خالد",
+      "phone": "0599999999",
+      "email": "admin@example.com",
+      "id": "bc58"
+    },
+    {
+      "id": "0008",
+      "role": "student",
+      "userId": "65814",
+      "password": "pas121",
+      "name": "أشجان أحمد",
+      "academicId": "65814",
+      "major": "حاسب آلي",
+      "phone": "0500000000",
+      "email": "studentA@example.com"
+    }
+  ],
+  "schedules": [
+    {
+      "userId": "1111",
+      "day": "الأحد",
+      "subject": "مادة 1",
+      "time": "8:00 - 10:00 صباحاً",
+      "room": "A101",
+      "id": "65d0"
+    },
+    {
+      "userId": "1111",
+      "day": "الأحد",
+      "subject": "مادة 2",
+      "time": "10:00 - 12:00 مساءً",
+      "room": "A102",
+      "id": "2850"
+    },
+    {
+      "userId": "2222",
+      "day": "الأحد",
+      "subject": "برمجة 1",
+      "time": "8:00 - 10:00 صباحاً",
+      "room": "B201",
+      "id": "01cf"
+    }
+  ],
+  "attendance": [
+    {
+      "id": "1",
+      "userId": "1111",
+      "subject": "مادة 1",
+      "absences": 4
+    },
+    {
+      "id": "2",
+      "userId": "1111",
+      "subject": "مادة 2",
+      "absences": 1
+    }
+  ],
+  "grades": [
+    {
+      "id": "1",
+      "userId": "1111",
+      "subject": "مادة 1",
+      "grade": 99
+    },
+    {
+      "id": "2",
+      "userId": "1111",
+      "subject": "مادة 2",
+      "grade": 99
+    }
+  ],
+  "subjects": [
+  {
+    "id": 1,
+    "code": "CS101",
+    "name": "مقدمة في الحاسب"
+  },
+  {
+    "id": 2,
+    "code": "MATH201",
+    "name": "التفاضل والتكامل"
+  }
+  ]
+}

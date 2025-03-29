@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>تسجيل الطالبات الجدد</title>
+  <link rel="icon" type="png" href="logo.png" />
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
+    <nav class="top-nav">
+      <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+      <ul class="top-buttons">
+        <li><a href="admin.html">رجوع</a></li>
+        <li><button onclick="logout()">تسجيل الخروج</button></li>
+      </ul>
+    </nav>
+    <h1>تسجيل الطالبات الجدد</h1>
+  </header>
+
+  <aside id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="adminRegister.html" class="active">تسجيل الطالبات الجدد</a></li>
+      <li><a href="adminUpdate.html">تحديث بيانات الطالبات</a></li>
+    </ul>
+  </aside>
+  
+  <section class="register-form">
+    <form id="registerStudentForm">
+      <label for="newStudentName">اسم الطالبة:</label>
+      <input type="text" id="newStudentName" name="newStudentName">
+      
+      <label for="newStudentAcademicId">الرقم الأكاديمي:</label>
+      <input type="text" id="newStudentAcademicId" name="newStudentId">
+      
+      <label for="major">التخصص:</label>
+      <input type="text" id="major" name="major">
+
+      <label for="phone">رقم الجوال:</label>
+      <input type="text" id="phone" name="phone" placeholder="اختياري">
+      <label for="email">البريد الإلكتروني:</label>
+      <input type="email" id="email" name="email" placeholder="اختياري">
+
+      <!-- كلمة مرور افتراضية/ يدوية / أو يمكنكِ إزالتها إن لم ترغبي -->
+      <label for="password">كلمة المرور:</label>
+      <input type="password" id="password" name="password" placeholder="مثال: 12345" required>
+
+      
+      <button type="submit">تسجيل</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>جميع الحقوق محفوظة لدى طالبات وئام ، رفعة ، أشجان ، مجيدة ، شوق</p>
+  </footer>
+</body>
+</html>
