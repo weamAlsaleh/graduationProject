@@ -10,14 +10,23 @@
 <body>
   <header>
     <img src="logo.png" alt="شعار الأكاديمية" class="institute-logo">
-    <h1>تسجيل/تعديل غياب الطالبات</h1>
     <nav class="top-nav">
       <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
       <ul class="top-buttons">
+        <li><a href="teacher.html">رجوع</a></li>
         <li><button onclick="logout()">تسجيل الخروج</button></li>
       </ul>
     </nav>
+    <h1>تسجيل/تعديل غياب الطالبات</h1>
   </header>
+
+  <aside id="sideMenu" class="side-menu">
+    <ul>
+      <li><a href="teacherSchedule.html">عرض جدول المعلمة</a></li>
+      <li><a href="teacherAttendance.html" class="active">تسجيل حضور الطالبات</a></li>
+      <li><a href="teacherGrades.html">إدخال الدرجات</a></li>
+    </ul>
+  </aside>
 
   <main>
     <!-- يمكن تغيير الآلية؛ في هذا المثال تسمح المعلّمة باختيار المادة من قائمة منسدلة -->
@@ -25,9 +34,7 @@
       <label for="subjectSelect">اختر المادة:</label>
       <select id="subjectSelect">
         <option value="" selected disabled>-- اختر مادة --</option>
-        <option value="مادة 1">مادة 1</option>
-        <option value="مادة 2">مادة 2</option>
-        <!-- يمكنك إضافة باقي المواد أو جلبها ديناميكيًا من db.json -->
+        <!-- سيتم تعبئة الخيارات ديناميكيًا من المواد التي تدرسها المعلمة -->
       </select>
       <button id="loadStudentsBtn">عرض الطالبات</button>
     </div>

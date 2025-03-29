@@ -36,12 +36,11 @@
       <label for="subjectInput">المادة:</label>
       <select id="subjectInput" name="subject" required>
         <option value="">--اختر المادة--</option>
-        <option value="مادة 1">مادة 1</option>
-        <option value="مادة 2">مادة 2</option>
+        <!-- سيتم تعبئة الخيارات ديناميكيًا من المواد التي تدرسها المعلمة -->
       </select>
       
       <label for="gradeInput">الدرجة:</label>
-      <input type="number" id="gradeInput" name="grade" required>
+      <input type="number" id="gradeInput" name="grade" min="0" max="100" required>
       
       <button type="submit">إدخال</button>
     </form>

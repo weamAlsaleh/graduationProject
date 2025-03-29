@@ -51,6 +51,16 @@
       "major": "حاسب آلي",
       "phone": "0500000000",
       "email": "studentA@example.com"
+    },
+    {
+      "id": "6d78",
+      "role": "teacher",
+      "userId": "2323",
+      "name": "ياسمين الحربي",
+      "specialty": "English",
+      "phone": "0557983072",
+      "email": "teacherY@example.com",
+      "password": "pass4"
     }
   ],
   "schedules": [
@@ -77,6 +87,51 @@
       "time": "8:00 - 10:00 صباحاً",
       "room": "B201",
       "id": "01cf"
+    },
+    {
+      "id": "a466",
+      "role": "student",
+      "userId": "1111",
+      "subject": "مقدمة في الحاسب",
+      "day": "الأحد",
+      "time": "10:00 - 11:00 صباحا",
+      "room": "A101"
+    },
+    {
+      "id": "6c44",
+      "role": "student",
+      "userId": "1111",
+      "subject": "English",
+      "day": "الأثنين",
+      "time": "8:00 - 10:00 صباحاً",
+      "room": "A101"
+    },
+    {
+      "id": "0d86",
+      "role": "teacher",
+      "userId": "2323",
+      "subject": "English",
+      "day": "الأثنين",
+      "time": "8:00 - 10:00 صباحاً",
+      "room": "A101"
+    },
+    {
+      "id": "defb",
+      "role": "student",
+      "userId": "1222",
+      "subject": "English",
+      "day": "الأثنين",
+      "time": "8:00 - 10:00 صباحاً",
+      "room": "A101"
+    },
+    {
+      "id": "de19",
+      "role": "student",
+      "userId": "65814",
+      "subject": "English",
+      "day": "الأثنين",
+      "time": "8:00 - 10:00 صباحاً",
+      "room": "A101"
     }
   ],
   "attendance": [
@@ -90,6 +145,18 @@
       "id": "2",
       "userId": "1111",
       "subject": "مادة 2",
+      "absences": 1
+    },
+    {
+      "id": "f0b7",
+      "userId": "1222",
+      "subject": "English",
+      "absences": 1
+    },
+    {
+      "id": "98bc",
+      "userId": "65814",
+      "subject": "English",
       "absences": 1
     }
   ],
@@ -105,18 +172,35 @@
       "userId": "1111",
       "subject": "مادة 2",
       "grade": 99
+    },
+    {
+      "id": "67ee",
+      "userId": "1111",
+      "subject": "English",
+      "grade": 99
+    },
+    {
+      "id": "fe26",
+      "userId": "65814",
+      "subject": "English",
+      "grade": 81
     }
   ],
   "subjects": [
-  {
-    "id": 1,
-    "code": "CS101",
-    "name": "مقدمة في الحاسب"
-  },
-  {
-    "id": 2,
-    "code": "MATH201",
-    "name": "التفاضل والتكامل"
-  }
+    {
+      "id": "1",
+      "code": "CS101",
+      "name": "مقدمة في الحاسب"
+    },
+    {
+      "id": "2",
+      "code": "MATH201",
+      "name": "التفاضل والتكامل"
+    },
+    {
+      "id": "ea93",
+      "code": "ENG101",
+      "name": "English"
+    }
   ]
 }
