@@ -61,6 +61,39 @@
       "phone": "0557983072",
       "email": "teacherY@example.com",
       "password": "pass4"
+    },
+    {
+      "id": "e65f",
+      "role": "student",
+      "userId": "12312312",
+      "academicId": "12312312",
+      "name": "ساره العنزي",
+      "major": "حاسب الي",
+      "phone": "",
+      "email": "",
+      "password": "12345"
+    },
+    {
+      "id": "b4c8",
+      "role": "student",
+      "userId": "5555",
+      "academicId": "321543",
+      "name": "ss",
+      "major": "phs",
+      "phone": "",
+      "email": "",
+      "password": "12345"
+    },
+    {
+      "id": "927c",
+      "role": "student",
+      "userId": "121212",
+      "academicId": "121212",
+      "name": "ss",
+      "major": "حاسب الي",
+      "phone": "",
+      "email": "",
+      "password": "12345"
     }
   ],
   "schedules": [
@@ -129,27 +162,20 @@
     }
   ],
   "attendance": [
-
     {
       "id": "98bc",
       "userId": "65814",
       "subject": "English",
       "absences": 1
     }
-
-    
   ],
- 
- 
   "grades": [
-    
     {
       "id": "67ee",
       "userId": "1111",
       "subject": "English",
       "grade": 99
     },
-   
     {
       "id": "fe26",
       "userId": "65814",

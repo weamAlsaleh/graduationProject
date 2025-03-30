@@ -397,74 +397,75 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // ===== وظائف adminRegister.html و adminUpdate.html =====
   const registerStudentForm = document.getElementById("registerStudentForm");
-  if (registerStudentForm) {
-    registerStudentForm.addEventListener("submit", function(event) {
-      event.preventDefault();
+if (registerStudentForm) {
+  registerStudentForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById("newStudentName").value.trim();
+    const academicId = document.getElementById("newStudentAcademicId").value.trim();
+    const major = document.getElementById("major").value.trim();
+    const phone = document.getElementById("phone") ? document.getElementById("phone").value.trim() : "";
+    const email = document.getElementById("email") ? document.getElementById("email").value.trim() : "";
+    const password = document.getElementById("password").value.trim();
+    
+    if (!name || !academicId || !major || !password) {
+      alert("الرجاء تعبئة جميع الحقول المطلوبة!");
+      return;
+    }
+    
+    try {
+      // Get all students to do a more accurate check for the academicId
+      const response = await fetch(`${SERVER_URL}/users?role=student`);
+      if (!response.ok) {
+        throw new Error(`خطأ في الاتصال بالسيرفر: ${response.status}`);
+      }
       
-      const name = document.getElementById("newStudentName").value.trim();
-      const academicId = document.getElementById("newStudentAcademicId").value.trim();
-      const major = document.getElementById("major").value.trim();
-      const phone = document.getElementById("phone") ? document.getElementById("phone").value.trim() : "";
-      const email = document.getElementById("email") ? document.getElementById("email").value.trim() : "";
-      const password = document.getElementById("password").value.trim();
+      const students = await response.json();
+      // More precise check to make sure we only look at student records
+      const existingStudent = students.find(s => 
+        s.academicId === academicId || s.userId === academicId
+      );
       
-      if (!name || !academicId || !major || !password) {
-        alert("الرجاء تعبئة جميع الحقول المطلوبة!");
+      if (existingStudent) {
+        alert("الرقم الأكاديمي مستخدم مسبقًا!");
         return;
       }
       
-      // التحقق من عدم تكرار الرقم الأكاديمي
-      fetch(`${SERVER_URL}/users?academicId=${academicId}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`خطأ في الاتصال بالسيرفر: ${response.status}`);
-          }
-          return response.json();
+      // إضافة الطالبة إلى قاعدة البيانات
+      const registerResponse = await fetch(`${SERVER_URL}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          role: "student",
+          userId: academicId, // استخدام نفس الرقم الأكاديمي كمعرف للمستخدم
+          academicId: academicId,
+          name: name,
+          major: major,
+          phone: phone,
+          email: email,
+          password: password
         })
-        .then(students => {
-          if (students.length > 0) {
-            alert("الرقم الأكاديمي مستخدم مسبقًا!");
-            return;
-          }
-          
-          // إضافة الطالبة إلى قاعدة البيانات
-          return fetch(`${SERVER_URL}/users`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              role: "student",
-              userId: academicId, // استخدام نفس الرقم الأكاديمي كمعرف للمستخدم
-              academicId: academicId,
-              name: name,
-              major: major,
-              phone: phone,
-              email: email,
-              password: password
-            })
-          });
-        })
-        .then(response => {
-          if (!response || !response.ok) {
-            throw new Error("فشل في تسجيل الطالبة!");
-          }
-          return response.json();
-        })
-        .then(data => {
-          alert(`تم تسجيل الطالبة بنجاح!
-          الاسم: ${name}
-          الرقم الأكاديمي: ${academicId}
-          التخصص: ${major}`);
-          
-          registerStudentForm.reset();
-        })
-        .catch(error => {
-          console.error("خطأ:", error);
-          alert("حدث خطأ في عملية التسجيل: " + error.message);
-        });
-    });
-  }
+      });
+      
+      if (!registerResponse.ok) {
+        throw new Error("فشل في تسجيل الطالبة!");
+      }
+      
+      const data = await registerResponse.json();
+      alert(`تم تسجيل الطالبة بنجاح!
+      الاسم: ${name}
+      الرقم الأكاديمي: ${academicId}
+      التخصص: ${major}`);
+      
+      registerStudentForm.reset();
+    } catch (error) {
+      console.error("خطأ:", error);
+      alert("حدث خطأ في عملية التسجيل: " + error.message);
+    }
+  });
+}
   
   const loadStudentDataBtn = document.getElementById("loadStudentDataBtn");
   if (loadStudentDataBtn) {
@@ -853,7 +854,7 @@ async function loadStudentsForSubject() {
   }
 }
 
-// Updated attendance recording function
+// تحديث الغياب
 async function handleMarkAttendanceForm(event) {
   event.preventDefault();
   
@@ -1052,6 +1053,68 @@ async function handleAddScheduleForm(e) {
   }
 }
 
+window.editSchedule = async function(id) {
+  try {
+    // Fetch the current record
+    const response = await fetch(`${SERVER_URL}/schedules/${id}`);
+    if (!response.ok) {
+      throw new Error(`خطأ في الاتصال بالسيرفر: ${response.status}`);
+    }
+    
+    const schedule = await response.json();
+    
+    // Show a simple edit form
+    const newDay = prompt("أدخل اليوم الجديد:", schedule.day);
+    if (!newDay) return; // Cancel the edit
+    
+    const newTime = prompt("أدخل الوقت الجديد:", schedule.time);
+    if (!newTime) return;
+    
+    const newRoom = prompt("أدخل القاعة الجديدة:", schedule.room);
+    if (!newRoom) return;
+    
+    // Update the record
+    const updateResponse = await fetch(`${SERVER_URL}/schedules/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        day: newDay,
+        time: newTime,
+        room: newRoom
+      })
+    });
+    
+    if (!updateResponse.ok) {
+      throw new Error(`خطأ في الاتصال بالسيرفر: ${updateResponse.status}`);
+    }
+    
+    alert("تم تعديل السجل بنجاح!");
+    loadSchedules();
+  } catch (err) {
+    console.error(err);
+    alert("خطأ في تعديل السجل: " + err.message);
+  }
+};
+
+window.deleteSchedule = async function(id) {
+  if (!confirm("هل أنت متأكد من الحذف؟")) return;
+  
+  try {
+    const response = await fetch(`${SERVER_URL}/schedules/${id}`, { method: "DELETE" });
+    if (!response.ok) {
+      throw new Error(`خطأ في الاتصال بالسيرفر: ${response.status}`);
+    }
+    
+    alert("تم حذف السجل بنجاح!");
+    loadSchedules();
+  } catch (err) {
+    console.error(err);
+    alert("خطأ في حذف السجل: " + err.message);
+  }
+};
+
 // جلب وعرض جميع سجلات الجداول
 async function loadSchedules() {
   try {
@@ -1079,8 +1142,8 @@ async function loadSchedules() {
         <td>${item.day || ''}</td>
         <td>${item.time || ''}</td>
         <td>${item.room || ''}</td>
-        <td><button onclick="editSchedule(${item.id})">تحرير</button></td>
-        <td><button onclick="deleteSchedule(${item.id})">حذف</button></td>
+        <td><button onclick="window.editSchedule('${item.id}')">تحرير</button></td>
+        <td><button onclick="window.deleteSchedule('${item.id}')">حذف</button></td>
       `;
       tableBody.appendChild(tr);
     });
@@ -1090,69 +1153,7 @@ async function loadSchedules() {
   }
 }
 
-// حذف سجل جدول
-async function deleteSchedule(id) {
-  if (!confirm("هل أنت متأكد من الحذف؟")) return;
-  
-  try {
-    const response = await fetch(`${SERVER_URL}/schedules/${id}`, { method: "DELETE" });
-    if (!response.ok) {
-      throw new Error(`خطأ في الاتصال بالسيرفر: ${response.status}`);
-    }
-    
-    alert("تم حذف السجل بنجاح!");
-    loadSchedules();
-  } catch (err) {
-    console.error(err);
-    alert("خطأ في حذف السجل: " + err.message);
-  }
-}
 
-// تعديل سجل
-async function editSchedule(id) {
-  try {
-    // جلب السجل الحالي
-    const response = await fetch(`${SERVER_URL}/schedules/${id}`);
-    if (!response.ok) {
-      throw new Error(`خطأ في الاتصال بالسيرفر: ${response.status}`);
-    }
-    
-    const schedule = await response.json();
-    
-    // عرض نموذج تعديل بسيط
-    const newDay = prompt("أدخل اليوم الجديد:", schedule.day);
-    if (!newDay) return; // إلغاء التعديل
-    
-    const newTime = prompt("أدخل الوقت الجديد:", schedule.time);
-    if (!newTime) return;
-    
-    const newRoom = prompt("أدخل القاعة الجديدة:", schedule.room);
-    if (!newRoom) return;
-    
-    // تحديث السجل
-    const updateResponse = await fetch(`${SERVER_URL}/schedules/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        day: newDay,
-        time: newTime,
-        room: newRoom
-      })
-    });
-    
-    if (!updateResponse.ok) {
-      throw new Error(`خطأ في الاتصال بالسيرفر: ${updateResponse.status}`);
-    }
-    
-    alert("تم تعديل السجل بنجاح!");
-    loadSchedules();
-  } catch (err) {
-    console.error(err);
-    alert("خطأ في تعديل السجل: " + err.message);
-  }
-}
 
 // جلب وعرض قائمة المواد
 async function loadSubjects() {
