@@ -65,28 +65,13 @@
   ],
   "schedules": [
     {
-      "userId": "1111",
-      "day": "الأحد",
-      "subject": "مادة 1",
-      "time": "8:00 - 10:00 صباحاً",
-      "room": "A101",
-      "id": "65d0"
-    },
-    {
-      "userId": "1111",
-      "day": "الأحد",
-      "subject": "مادة 2",
-      "time": "10:00 - 12:00 مساءً",
-      "room": "A102",
-      "id": "2850"
-    },
-    {
+      "id": "01cf",
+      "role": "student",
       "userId": "2222",
       "day": "الأحد",
       "subject": "برمجة 1",
       "time": "8:00 - 10:00 صباحاً",
-      "room": "B201",
-      "id": "01cf"
+      "room": "B201"
     },
     {
       "id": "a466",
@@ -132,53 +117,39 @@
       "day": "الأثنين",
       "time": "8:00 - 10:00 صباحاً",
       "room": "A101"
+    },
+    {
+      "id": "b011",
+      "role": "student",
+      "userId": "1222",
+      "subject": "مقدمة في الحاسب",
+      "day": "الأحد",
+      "time": "10:00-11:00 صباحاً",
+      "room": "A101"
     }
   ],
   "attendance": [
-    {
-      "id": "1",
-      "userId": "1111",
-      "subject": "مادة 1",
-      "absences": 4
-    },
-    {
-      "id": "2",
-      "userId": "1111",
-      "subject": "مادة 2",
-      "absences": 1
-    },
-    {
-      "id": "f0b7",
-      "userId": "1222",
-      "subject": "English",
-      "absences": 1
-    },
+
     {
       "id": "98bc",
       "userId": "65814",
       "subject": "English",
       "absences": 1
     }
+
+    
   ],
+ 
+ 
   "grades": [
-    {
-      "id": "1",
-      "userId": "1111",
-      "subject": "مادة 1",
-      "grade": 99
-    },
-    {
-      "id": "2",
-      "userId": "1111",
-      "subject": "مادة 2",
-      "grade": 99
-    },
+    
     {
       "id": "67ee",
       "userId": "1111",
       "subject": "English",
       "grade": 99
     },
+   
     {
       "id": "fe26",
       "userId": "65814",
@@ -198,9 +169,14 @@
       "name": "التفاضل والتكامل"
     },
     {
-      "id": "ea93",
+      "id": "3",
       "code": "ENG101",
       "name": "English"
+    },
+    {
+      "id": "4",
+      "code": "SE 201",
+      "name": "مقدمة في هندسة  البرمجيات"
     }
   ]
 }
